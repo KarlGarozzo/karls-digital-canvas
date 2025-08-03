@@ -2,6 +2,8 @@ import { useEffect } from 'react'
 import { ThemeProvider } from '@/components/ThemeProvider'
 import { LanguageProvider } from '@/components/LanguageProvider'
 import { Navigation } from '@/components/Navigation'
+import { ParticleSystem } from '@/components/ParticleSystem'
+import { AnimatedBackground } from '@/components/AnimatedBackground'
 import { Hero } from '@/components/sections/Hero'
 import { About } from '@/components/sections/About'
 import { Projects } from '@/components/sections/Projects'
@@ -19,10 +21,15 @@ const Index = () => {
   return (
     <ThemeProvider defaultTheme="dark">
       <LanguageProvider>
-        <div className="min-h-screen bg-background text-foreground font-sans overflow-x-hidden">
-          {/* Background Elements */}
+        <div className="min-h-screen bg-background text-foreground font-sans overflow-x-hidden relative">
+          {/* Enhanced Background Elements */}
+          <AnimatedBackground />
+          <ParticleSystem />
+          
+          {/* Advanced background gradients */}
           <div className="fixed inset-0 bg-gradient-to-br from-background via-background to-midnight/20 pointer-events-none" />
           <div className="fixed inset-0 bg-[radial-gradient(ellipse_at_center,_var(--cyan-glow)_0%,_transparent_50%)] opacity-[0.03] pointer-events-none" />
+          <div className="fixed inset-0 backdrop-noise pointer-events-none" />
           
           {/* Navigation */}
           <Navigation />

@@ -2,6 +2,8 @@ import { GlassCard } from '@/components/GlassCard'
 import { Button } from '@/components/ui/button'
 import { ExternalLink, Github } from 'lucide-react'
 import { useLanguage } from '@/components/LanguageProvider'
+import { ScrollAnimation } from '@/components/ScrollAnimations'
+import { MagneticButton } from '@/components/MagneticButton'
 
 export function Projects() {
   const { t } = useLanguage()
@@ -45,58 +47,86 @@ export function Projects() {
     <section id="projects" className="py-20 relative">
       <div className="container mx-auto px-6">
         <div className="max-w-6xl mx-auto">
-          <h2 className="text-3xl md:text-4xl font-display font-bold text-center mb-12 bg-gradient-primary bg-clip-text text-transparent">
-            {t('projects.title')}
-          </h2>
+          <ScrollAnimation animation="fadeInUp">
+            <h2 className="text-3xl md:text-4xl font-display font-bold text-center mb-12 gradient-text text-glow">
+              {t('projects.title')}
+            </h2>
+          </ScrollAnimation>
 
           <div className="grid md:grid-cols-2 gap-8">
             {projects.map((project, index) => (
-              <GlassCard
-                key={index}
-                className="group overflow-hidden"
-                hover={true}
+              <ScrollAnimation 
+                key={index} 
+                animation={index % 2 === 0 ? 'fadeInLeft' : 'fadeInRight'}
+                delay={index * 200}
               >
-                <div className="relative h-48 overflow-hidden">
-                  <img
-                    src={project.image}
-                    alt={project.title}
-                    className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-background/80 to-transparent" />
-                </div>
-
-                <div className="p-6">
-                  <h3 className="text-xl font-display font-semibold mb-3 text-foreground">
-                    {project.title}
-                  </h3>
-                  
-                  <p className="text-muted-foreground mb-4 leading-relaxed">
-                    {project.description}
-                  </p>
-
-                  <div className="flex flex-wrap gap-2 mb-6">
-                    {project.tags.map((tag, tagIndex) => (
-                      <span
-                        key={tagIndex}
-                        className="px-3 py-1 text-xs font-medium bg-accent/20 text-accent rounded-full"
-                      >
-                        {tag}
-                      </span>
-                    ))}
+                <GlassCard
+                  className="group overflow-hidden hover-lift backdrop-noise relative"
+                  hover={true}
+                >
+                  {/* Enhanced image with parallax effect */}
+                  <div className="relative h-48 overflow-hidden">
+                    <div className="absolute inset-0 bg-gradient-to-br from-accent/20 to-primary/20 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                    <img
+                      src={project.image}
+                      alt={project.title}
+                      className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-background/80 to-transparent" />
+                    
+                    {/* Floating tech badges */}
+                    <div className="absolute top-4 right-4 opacity-0 group-hover:opacity-100 transition-opacity duration-500">
+                      <div className="flex flex-wrap gap-1">
+                        {project.tags.slice(0, 2).map((tag, tagIndex) => (
+                          <span
+                            key={tagIndex}
+                            className="px-2 py-1 text-xs font-medium bg-glass-bg backdrop-blur-sm text-accent rounded-full border border-glass-border"
+                          >
+                            {tag}
+                          </span>
+                        ))}
+                      </div>
+                    </div>
                   </div>
 
-                  <div className="flex items-center space-x-3">
-                    <Button variant="ghost" size="sm" className="hover:bg-accent/20">
-                      <Github className="h-4 w-4 mr-2" />
-                      Code
-                    </Button>
-                    <Button variant="ghost" size="sm" className="hover:bg-accent/20">
-                      <ExternalLink className="h-4 w-4 mr-2" />
-                      {t('projects.view')}
-                    </Button>
+                  <div className="p-6 relative">
+                    {/* Subtle glow effect */}
+                    <div className="absolute inset-0 bg-gradient-to-br from-accent/5 to-primary/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500 rounded-b-2xl" />
+                    
+                    <div className="relative z-10">
+                      <h3 className="text-xl font-display font-semibold mb-3 text-foreground group-hover:text-accent transition-colors duration-300">
+                        {project.title}
+                      </h3>
+                      
+                      <p className="text-muted-foreground mb-4 leading-relaxed">
+                        {project.description}
+                      </p>
+
+                      <div className="flex flex-wrap gap-2 mb-6">
+                        {project.tags.map((tag, tagIndex) => (
+                          <span
+                            key={tagIndex}
+                            className="px-3 py-1 text-xs font-medium bg-accent/20 text-accent rounded-full hover:bg-accent/30 transition-colors duration-200"
+                          >
+                            {tag}
+                          </span>
+                        ))}
+                      </div>
+
+                      <div className="flex items-center space-x-3">
+                        <MagneticButton variant="ghost" size="sm" className="hover:bg-accent/20">
+                          <Github className="h-4 w-4 mr-2" />
+                          Code
+                        </MagneticButton>
+                        <MagneticButton variant="ghost" size="sm" className="hover:bg-accent/20">
+                          <ExternalLink className="h-4 w-4 mr-2" />
+                          {t('projects.view')}
+                        </MagneticButton>
+                      </div>
+                    </div>
                   </div>
-                </div>
-              </GlassCard>
+                </GlassCard>
+              </ScrollAnimation>
             ))}
           </div>
         </div>

@@ -121,45 +121,105 @@
 }
 
 @layer components {
-  /* Glass morphism utilities */
+  /* Enhanced glass morphism utilities */
   .glass-effect {
-    @apply bg-gradient-to-br from-glass-bg to-glass-bg/50 backdrop-blur-md border border-glass-border shadow-glass;
+    @apply bg-gradient-to-br from-glass-bg to-glass-bg/50 backdrop-blur-2xl border border-glass-border shadow-glass;
+    background-image: 
+      radial-gradient(circle at 20% 80%, rgba(120, 119, 198, 0.3) 0%, transparent 50%),
+      radial-gradient(circle at 80% 20%, rgba(255, 255, 255, 0.15) 0%, transparent 50%),
+      radial-gradient(circle at 40% 40%, rgba(120, 119, 198, 0.15) 0%, transparent 50%);
   }
   
   .glass-card {
-    @apply glass-effect rounded-2xl;
+    @apply glass-effect rounded-2xl relative overflow-hidden;
   }
   
-  /* Scroll indicator */
-  .scroll-indicator {
-    position: fixed;
+  .glass-card::before {
+    content: '';
+    position: absolute;
     top: 0;
     left: 0;
-    width: 100%;
-    height: 4px;
-    background: linear-gradient(to right, hsl(var(--primary)), hsl(var(--accent)));
-    transform-origin: left;
-    z-index: 9999;
+    right: 0;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
   }
   
-  /* Smooth scrolling for mobile */
-  @media (max-width: 768px) {
-    html {
-      scroll-behavior: auto;
-    }
+  .glass-card::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 1px;
+    bottom: 0;
+    background: linear-gradient(180deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+  }
+  
+  /* Advanced hover effects */
+  .hover-lift {
+    @apply transition-all duration-500 ease-out;
+    transform-style: preserve-3d;
+  }
+  
+  .hover-lift:hover {
+    transform: translateY(-8px) rotateX(5deg);
+    box-shadow: 0 20px 40px rgba(0, 212, 255, 0.15);
+  }
+  
+  .magnetic-hover {
+    transition: transform 0.2s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  }
+  
+  /* Gradient text animations */
+  .gradient-text {
+    @apply bg-gradient-primary bg-clip-text text-transparent;
+    background-size: 200% 200%;
+    animation: gradient-shift 3s ease infinite;
+  }
+  
+  @keyframes gradient-shift {
+    0%, 100% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+  }
+  
+  /* Pulse animations */
+  .pulse-slow {
+    animation: pulse-slow 4s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+  }
+  
+  @keyframes pulse-slow {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.7; }
+  }
+  
+  /* Flow animation for light streaks */
+  @keyframes flow {
+    0% { transform: translateX(-100%); opacity: 0; }
+    50% { opacity: 1; }
+    100% { transform: translateX(100vw); opacity: 0; }
   }
 }
 
 @layer utilities {
-  /* Animation delays */
+  /* Advanced animation delays */
   .animate-delay-100 { animation-delay: 0.1s; }
   .animate-delay-200 { animation-delay: 0.2s; }
   .animate-delay-300 { animation-delay: 0.3s; }
   .animate-delay-500 { animation-delay: 0.5s; }
+  .animate-delay-700 { animation-delay: 0.7s; }
+  .animate-delay-1000 { animation-delay: 1s; }
   
-  /* Text gradients */
+  /* Enhanced text effects */
   .text-gradient {
     @apply bg-gradient-primary bg-clip-text text-transparent;
+  }
+  
+  .text-glow {
+    text-shadow: 0 0 10px hsl(var(--accent) / 0.5);
+  }
+  
+  /* Interactive utilities */
+  .interactive-card {
+    @apply transition-all duration-500 ease-out hover:scale-[1.02] hover:shadow-2xl hover:shadow-accent/20;
   }
   
   /* Hide scrollbar */
@@ -169,5 +229,15 @@
   .no-scrollbar {
     -ms-overflow-style: none;
     scrollbar-width: none;
+  }
+  
+  /* Perspective for 3D effects */
+  .perspective {
+    perspective: 1000px;
+  }
+  
+  /* Backdrop effects */
+  .backdrop-noise {
+    background-image: url("data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTAwIiBoZWlnaHQ9IjEwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KICA8ZGVmcz4KICAgIDxmaWx0ZXIgaWQ9Im5vaXNlIj4KICAgICAgPGZlVHVyYnVsZW5jZSB0eXBlPSJmcmFjdGFsTm9pc2UiIGJhc2VGcmVxdWVuY3k9IjAuOSIgbnVtT2N0YXZlcz0iNCIgc3RpdGNoVGlsZXM9InN0aXRjaCIvPgogICAgPC9maWx0ZXI+CiAgPC9kZWZzPgogIDxyZWN0IHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiIGZpbHRlcj0idXJsKCNub2lzZSkiIG9wYWNpdHk9IjAuMDUiLz4KPC9zdmc+");
   }
 }

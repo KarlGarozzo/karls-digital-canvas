@@ -4,11 +4,11 @@ import { Button } from '@/components/ui/button'
 import { useTheme } from '@/components/ThemeProvider'
 import { useLanguage } from '@/components/LanguageProvider'
 import { GlassCard } from '@/components/GlassCard'
+import { ThemeToggle } from '@/components/ThemeToggle'
 import { cn } from '@/lib/utils'
 
 export function Navigation() {
   const [scrolled, setScrolled] = useState(false)
-  const { theme, setTheme, resolvedTheme } = useTheme()
   const { language, setLanguage, t } = useLanguage()
 
   useEffect(() => {
@@ -78,7 +78,7 @@ export function Navigation() {
               variant="ghost"
               size="sm"
               onClick={() => setLanguage(language === 'fr' ? 'en' : 'fr')}
-              className="hover:bg-accent/20 transition-colors"
+              className="hover:bg-accent/20 transition-all duration-300 hover:scale-105 magnetic-hover"
             >
               <Globe className="h-4 w-4 mr-1" />
               <span className="text-xs font-medium">
@@ -86,19 +86,8 @@ export function Navigation() {
               </span>
             </Button>
 
-            {/* Theme Toggle */}
-            <Button
-              variant="ghost"
-              size="sm"
-              onClick={() => setTheme(resolvedTheme === 'dark' ? 'light' : 'dark')}
-              className="hover:bg-accent/20 transition-colors"
-            >
-              {resolvedTheme === 'dark' ? (
-                <Sun className="h-4 w-4" />
-              ) : (
-                <Moon className="h-4 w-4" />
-              )}
-            </Button>
+            {/* Enhanced Theme Toggle */}
+            <ThemeToggle />
           </div>
         </div>
       </GlassCard>
