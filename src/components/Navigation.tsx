@@ -1,25 +1,26 @@
-import { useState, useEffect } from 'react'
-import { Moon, Sun, Globe } from 'lucide-react'
 import { Button } from '@/components/ui/button'
-import { useTheme } from '@/components/ThemeProvider'
+import { Menu, X, Download } from 'lucide-react'
+import { useState, useEffect } from 'react'
 import { useLanguage } from '@/components/LanguageProvider'
-import { GlassCard } from '@/components/GlassCard'
 import { ThemeToggle } from '@/components/ThemeToggle'
-import { cn } from '@/lib/utils'
+import { MagneticButton } from '@/components/MagneticButton'
 
 export function Navigation() {
-  const [scrolled, setScrolled] = useState(false)
-  const { language, setLanguage, t } = useLanguage()
+  const [isOpen, setIsOpen] = useState(false)
+  const [isScrolled, setIsScrolled] = useState(false)
+  const { t, language, setLanguage } = useLanguage()
 
   useEffect(() => {
     const handleScroll = () => {
-      setScrolled(window.scrollY > 50)
+      setIsScrolled(window.scrollY > 20)
     }
+
     window.addEventListener('scroll', handleScroll)
     return () => window.removeEventListener('scroll', handleScroll)
   }, [])
 
-  const scrollToSection = (id: string) => {
+  const scrollToSection = (href: string) => {
+    const id = href.replace('#', '')
     const element = document.getElementById(id)
     if (element) {
       element.scrollIntoView({ behavior: 'smooth' })
@@ -27,70 +28,145 @@ export function Navigation() {
   }
 
   const navItems = [
-    { key: 'about', label: t('nav.about'), id: 'about' },
-    { key: 'projects', label: t('nav.projects'), id: 'projects' },
-    { key: 'experience', label: t('nav.experience'), id: 'experience' },
-    { key: 'skills', label: t('nav.skills'), id: 'skills' },
-    { key: 'contact', label: t('nav.contact'), id: 'contact' },
+    { href: '#about', label: t('nav.about') },
+    { href: '#projects', label: t('nav.projects') },
+    { href: '#experience', label: t('nav.experience') },
+    { href: '#skills', label: t('nav.skills') },
+    { href: '#contact', label: t('nav.contact') },
+  ]
+
+  const languages = [
+    { code: 'en' as const, flag: '🇬🇧', name: 'English' },
+    { code: 'fr' as const, flag: '🇫🇷', name: 'Français' },
+    { code: 'pl' as const, flag: '🇵🇱', name: 'Polski' },
   ]
 
   return (
-    <nav
-      className={cn(
-        'fixed top-4 left-1/2 -translate-x-1/2 z-50 transition-all duration-500',
-        'w-[95%] max-w-4xl'
-      )}
-    >
-      <GlassCard
-        className={cn(
-          'px-6 py-3 transition-all duration-500',
-          scrolled ? 'backdrop-blur-xl shadow-xl' : 'backdrop-blur-md'
-        )}
-        hover={false}
+    <>
+      <nav
+        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
+          isScrolled 
+            ? 'bg-background/95 backdrop-blur-xl shadow-card border-b border-border/50' 
+            : 'bg-transparent'
+        }`}
       >
-        <div className="flex items-center justify-between">
-          {/* Logo */}
-          <button
-            onClick={() => scrollToSection('hero')}
-            className="text-xl font-display font-bold bg-gradient-primary bg-clip-text text-transparent hover:scale-105 transition-transform duration-300"
-          >
-            KA
-          </button>
+        <div className="container mx-auto px-6">
+          <div className="flex items-center justify-between h-20">
+            {/* KG Signature */}
+            <div className="font-signature text-3xl font-semibold text-primary tracking-wide hover:scale-105 transition-transform duration-300 cursor-pointer"
+                 onClick={() => scrollToSection('#hero')}>
+              KG
+            </div>
 
-          {/* Navigation Links - Hidden on mobile */}
-          <div className="hidden md:flex items-center space-x-8">
-            {navItems.map((item) => (
-              <button
-                key={item.key}
-                onClick={() => scrollToSection(item.id)}
-                className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors duration-300 relative group"
+            {/* Desktop Navigation */}
+            <nav className="hidden md:flex items-center space-x-8">
+              {navItems.map((item, index) => (
+                <MagneticButton
+                  key={index}
+                  variant="ghost"
+                  className="text-sm font-medium transition-colors hover:text-accent relative group"
+                  onClick={() => scrollToSection(item.href)}
+                >
+                  {item.label}
+                  <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-gradient-primary group-hover:w-full transition-all duration-300" />
+                </MagneticButton>
+              ))}
+            </nav>
+
+            {/* Right side controls */}
+            <div className="flex items-center space-x-4">
+              {/* Language Switcher */}
+              <div className="hidden md:flex items-center space-x-1 bg-secondary/50 rounded-full p-1">
+                {languages.map((lang) => (
+                  <MagneticButton
+                    key={lang.code}
+                    variant={language === lang.code ? 'default' : 'ghost'}
+                    size="sm"
+                    className={`text-xs px-3 py-2 rounded-full transition-all ${
+                      language === lang.code 
+                        ? 'bg-primary text-primary-foreground shadow-lg' 
+                        : 'hover:bg-primary/10'
+                    }`}
+                    onClick={() => setLanguage(lang.code)}
+                  >
+                    {lang.flag}
+                  </MagneticButton>
+                ))}
+              </div>
+              
+              {/* Download CV */}
+              <MagneticButton variant="outline" size="sm" className="hidden md:flex hover:bg-primary hover:text-primary-foreground transition-all">
+                <Download className="h-4 w-4 mr-2" />
+                {t('hero.cv')}
+              </MagneticButton>
+              
+              <ThemeToggle />
+              
+              {/* Mobile Menu Button */}
+              <MagneticButton
+                variant="ghost"
+                size="sm"
+                className="md:hidden"
+                onClick={() => setIsOpen(!isOpen)}
               >
-                {item.label}
-                <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-gradient-primary group-hover:w-full transition-all duration-300" />
-              </button>
-            ))}
-          </div>
-
-          {/* Controls */}
-          <div className="flex items-center space-x-2">
-            {/* Language Toggle */}
-            <Button
-              variant="ghost"
-              size="sm"
-              onClick={() => setLanguage(language === 'fr' ? 'en' : 'fr')}
-              className="hover:bg-accent/20 transition-all duration-300 hover:scale-105 magnetic-hover"
-            >
-              <Globe className="h-4 w-4 mr-1" />
-              <span className="text-xs font-medium">
-                {language === 'fr' ? '🇫🇷' : '🇬🇧'}
-              </span>
-            </Button>
-
-            {/* Enhanced Theme Toggle */}
-            <ThemeToggle />
+                {isOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
+              </MagneticButton>
+            </div>
           </div>
         </div>
-      </GlassCard>
-    </nav>
+      </nav>
+
+      {/* Mobile Navigation */}
+      <nav
+        className={`fixed inset-0 z-40 md:hidden transition-all duration-500 ${
+          isOpen
+            ? 'opacity-100 pointer-events-auto'
+            : 'opacity-0 pointer-events-none'
+        }`}
+      >
+        <div className="absolute inset-0 bg-background/95 backdrop-blur-xl" />
+        <div className="relative h-full flex flex-col justify-center items-center space-y-8">
+          <div className="space-y-6">
+            {navItems.map((item, index) => (
+              <Button
+                key={index}
+                variant="ghost"
+                className="block text-lg font-medium text-center w-full"
+                onClick={() => {
+                  scrollToSection(item.href)
+                  setIsOpen(false)
+                }}
+              >
+                {item.label}
+              </Button>
+            ))}
+          </div>
+          
+          {/* Mobile Language Switcher */}
+          <div className="flex items-center space-x-3 py-4">
+            {languages.map((lang) => (
+              <Button
+                key={lang.code}
+                variant={language === lang.code ? 'default' : 'outline'}
+                size="sm"
+                className="text-sm"
+                onClick={() => {
+                  setLanguage(lang.code)
+                  setIsOpen(false)
+                }}
+              >
+                {lang.flag} {lang.name}
+              </Button>
+            ))}
+          </div>
+          
+          {/* Mobile CV Download */}
+          <MagneticButton variant="default" className="mt-4">
+            <Download className="h-4 w-4 mr-2" />
+            {t('hero.cv')}
+          </MagneticButton>
+        </div>
+      </nav>
+    </>
   )
 }

@@ -20,7 +20,8 @@ export default {
 		extend: {
 			fontFamily: {
 				sans: ['Inter', 'system-ui', 'sans-serif'],
-				display: ['Space Grotesk', 'Inter', 'system-ui', 'sans-serif'],
+				display: ['Sora', 'Inter', 'system-ui', 'sans-serif'],
+				signature: ['Caveat', 'cursive'],
 			},
 			colors: {
 				border: 'hsl(var(--border))',
@@ -61,9 +62,9 @@ export default {
 					DEFAULT: 'hsl(var(--midnight))',
 					light: 'hsl(var(--midnight-light))'
 				},
-				cyan: {
-					glow: 'hsl(var(--cyan-glow))',
-					light: 'hsl(var(--cyan-light))'
+				indigo: {
+					glow: 'hsl(var(--indigo-glow))',
+					light: 'hsl(var(--indigo-light))'
 				},
 				glass: {
 					bg: 'hsl(var(--glass-bg))',

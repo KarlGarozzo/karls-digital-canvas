@@ -6,6 +6,7 @@ import { ParticleSystem } from '@/components/ParticleSystem'
 import { AnimatedBackground } from '@/components/AnimatedBackground'
 import { Hero } from '@/components/sections/Hero'
 import { About } from '@/components/sections/About'
+import { Education } from '@/components/sections/Education'
 import { Projects } from '@/components/sections/Projects'
 import { Experience } from '@/components/sections/Experience'
 import { Skills } from '@/components/sections/Skills'
@@ -14,12 +15,12 @@ import { Footer } from '@/components/sections/Footer'
 
 const Index = () => {
   useEffect(() => {
-    // Set default dark theme on load
-    document.documentElement.classList.add('dark')
+    // Set default light theme on load
+    document.documentElement.classList.remove('dark')
   }, [])
 
   return (
-    <ThemeProvider defaultTheme="dark">
+    <ThemeProvider defaultTheme="light">
       <LanguageProvider>
         <div className="min-h-screen bg-background text-foreground font-sans overflow-x-hidden relative">
           {/* Enhanced Background Elements */}
@@ -38,6 +39,7 @@ const Index = () => {
           <main className="relative z-10">
             <Hero />
             <About />
+            <Education />
             <Projects />
             <Experience />
             <Skills />
