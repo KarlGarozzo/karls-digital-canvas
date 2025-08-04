@@ -95,9 +95,14 @@ export function Navigation() {
               </div>
               
               {/* Download CV */}
-              <MagneticButton variant="outline" size="sm" className="hidden md:flex hover:bg-primary hover:text-primary-foreground transition-all">
-                <Download className="h-4 w-4 mr-2" />
+              <MagneticButton 
+                variant="outline" 
+                size="sm" 
+                className="group hidden md:flex hover:bg-primary hover:text-primary-foreground transition-all duration-300 border-primary/20 hover:border-primary overflow-hidden relative"
+              >
+                <Download className="h-4 w-4 mr-2 group-hover:rotate-12 transition-transform duration-300" />
                 {t('hero.cv')}
+                <div className="absolute inset-0 bg-gradient-to-r from-primary/10 to-accent/10 translate-x-[-100%] group-hover:translate-x-0 transition-transform duration-500" />
               </MagneticButton>
               
               <ThemeToggle />
@@ -161,9 +166,13 @@ export function Navigation() {
           </div>
           
           {/* Mobile CV Download */}
-          <MagneticButton variant="default" className="mt-4">
-            <Download className="h-4 w-4 mr-2" />
+          <MagneticButton 
+            variant="default" 
+            className="group mt-4 overflow-hidden relative"
+          >
+            <Download className="h-4 w-4 mr-2 group-hover:rotate-12 transition-transform duration-300" />
             {t('hero.cv')}
+            <div className="absolute inset-0 bg-gradient-to-r from-white/10 to-white/5 translate-x-[-100%] group-hover:translate-x-0 transition-transform duration-500" />
           </MagneticButton>
         </div>
       </nav>
