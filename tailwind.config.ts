@@ -22,6 +22,7 @@ export default {
 				sans: ['Inter', 'system-ui', 'sans-serif'],
 				display: ['Sora', 'Inter', 'system-ui', 'sans-serif'],
 				signature: ['Caveat', 'cursive'],
+				mono: ['JetBrains Mono', 'Monaco', 'Consolas', 'monospace'],
 			},
 			colors: {
 				border: 'hsl(var(--border))',
@@ -73,13 +74,17 @@ export default {
 			},
 			backgroundImage: {
 				'gradient-primary': 'var(--gradient-primary)',
+				'gradient-secondary': 'var(--gradient-secondary)',
 				'gradient-glow': 'var(--gradient-glow)',
 				'gradient-glass': 'var(--gradient-glass)',
+				'gradient-mesh': 'var(--gradient-mesh)',
 			},
 			boxShadow: {
 				glass: 'var(--shadow-glass)',
 				glow: 'var(--shadow-glow)',
 				card: 'var(--shadow-card)',
+				elevated: 'var(--shadow-elevated)',
+				floating: 'var(--shadow-floating)',
 			},
 			backdropBlur: {
 				xs: '2px',
@@ -129,6 +134,24 @@ export default {
 				'spin-slow': {
 					'from': { transform: 'rotate(0deg)' },
 					'to': { transform: 'rotate(360deg)' }
+				},
+				'morph': {
+					'0%, 100%': { borderRadius: '30% 70% 70% 30% / 30% 30% 70% 70%' },
+					'25%': { borderRadius: '58% 42% 75% 25% / 76% 46% 54% 24%' },
+					'50%': { borderRadius: '50% 50% 33% 67% / 55% 27% 73% 45%' },
+					'75%': { borderRadius: '33% 67% 58% 42% / 63% 68% 32% 37%' }
+				},
+				'slide-up': {
+					'0%': { opacity: '0', transform: 'translateY(50px)' },
+					'100%': { opacity: '1', transform: 'translateY(0)' }
+				},
+				'slide-down': {
+					'0%': { opacity: '0', transform: 'translateY(-50px)' },
+					'100%': { opacity: '1', transform: 'translateY(0)' }
+				},
+				'zoom-in': {
+					'0%': { opacity: '0', transform: 'scale(0.8)' },
+					'100%': { opacity: '1', transform: 'scale(1)' }
 				}
 			},
 			animation: {
@@ -137,10 +160,14 @@ export default {
 				'fade-in': 'fade-in 0.6s ease-out',
 				'fade-in-up': 'fade-in-up 0.8s ease-out',
 				'slide-in-right': 'slide-in-right 0.6s ease-out',
+				'slide-up': 'slide-up 0.6s ease-out',
+				'slide-down': 'slide-down 0.6s ease-out',
 				'scale-in': 'scale-in 0.5s ease-out',
+				'zoom-in': 'zoom-in 0.5s ease-out',
 				'glow-pulse': 'glow-pulse 2s ease-in-out infinite',
 				'float': 'float 3s ease-in-out infinite',
-				'spin-slow': 'spin-slow 8s linear infinite'
+				'spin-slow': 'spin-slow 8s linear infinite',
+				'morph': 'morph 8s ease-in-out infinite'
 			}
 		}
 	},

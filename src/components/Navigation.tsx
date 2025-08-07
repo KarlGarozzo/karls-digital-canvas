@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react'
 import { useLanguage } from '@/components/LanguageProvider'
 import { ThemeToggle } from '@/components/ThemeToggle'
 import { MagneticButton } from '@/components/MagneticButton'
+import { LanguageSwitcher } from '@/components/LanguageSwitcher'
 
 export function Navigation() {
   const [isOpen, setIsOpen] = useState(false)
@@ -44,17 +45,19 @@ export function Navigation() {
   return (
     <>
       <nav
-        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
+        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-700 ${
           isScrolled 
-            ? 'bg-background/95 backdrop-blur-xl shadow-card border-b border-border/50' 
+            ? 'glass-effect border-b border-glass-border shadow-elevated backdrop-blur-3xl' 
             : 'bg-transparent'
         }`}
       >
         <div className="container mx-auto px-6">
           <div className="flex items-center justify-between h-20">
             {/* KG Signature */}
-            <div className="font-signature text-3xl font-semibold text-primary tracking-wide hover:scale-105 transition-transform duration-300 cursor-pointer"
-                 onClick={() => scrollToSection('#hero')}>
+            <div 
+              className="font-signature text-3xl font-semibold gradient-text tracking-wide hover:scale-105 transition-all duration-500 cursor-pointer hover:text-shadow-glow"
+              onClick={() => scrollToSection('#hero')}
+            >
               KG
             </div>
 
@@ -64,11 +67,11 @@ export function Navigation() {
                 <MagneticButton
                   key={index}
                   variant="ghost"
-                  className="text-sm font-medium transition-colors hover:text-accent relative group"
+                  className="text-sm font-medium transition-all duration-300 hover:text-accent relative group hover:bg-glass-bg/30 rounded-lg"
                   onClick={() => scrollToSection(item.href)}
                 >
                   {item.label}
-                  <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-gradient-primary group-hover:w-full transition-all duration-300" />
+                  <span className="absolute -bottom-1 left-1/2 w-0 h-0.5 bg-gradient-primary group-hover:w-3/4 group-hover:left-1/8 transition-all duration-500" />
                 </MagneticButton>
               ))}
             </nav>
@@ -76,31 +79,17 @@ export function Navigation() {
             {/* Right side controls */}
             <div className="flex items-center space-x-4">
               {/* Language Switcher */}
-              <div className="hidden md:flex items-center space-x-1 bg-secondary/50 rounded-full p-1">
-                {languages.map((lang) => (
-                  <MagneticButton
-                    key={lang.code}
-                    variant={language === lang.code ? 'default' : 'ghost'}
-                    size="sm"
-                    className={`text-xs px-3 py-2 rounded-full transition-all ${
-                      language === lang.code 
-                        ? 'bg-primary text-primary-foreground shadow-lg' 
-                        : 'hover:bg-primary/10'
-                    }`}
-                    onClick={() => setLanguage(lang.code)}
-                  >
-                    {lang.flag}
-                  </MagneticButton>
-                ))}
+              <div className="hidden md:block">
+                <LanguageSwitcher variant="compact" />
               </div>
               
               {/* Download CV */}
               <MagneticButton 
                 variant="outline" 
                 size="sm" 
-                className="group hidden md:inline-flex items-center justify-center hover:bg-primary hover:text-primary-foreground transition-all duration-300 border-primary/20 hover:border-primary hover:shadow-glow relative"
+                className="group hidden md:inline-flex items-center justify-center glass-effect border-glass-border hover:border-accent hover:bg-gradient-primary hover:text-primary-foreground transition-all duration-500 hover:shadow-glow relative"
               >
-                <Download className="w-4 h-4 mr-2 transition-all duration-300 group-hover:translate-x-0.5" />
+                <Download className="w-4 h-4 mr-2 transition-all duration-300 group-hover:translate-x-0.5 group-hover:scale-110" />
                 <span className="text-sm font-medium">{t('hero.cv')}</span>
               </MagneticButton>
               
@@ -110,7 +99,7 @@ export function Navigation() {
               <MagneticButton
                 variant="ghost"
                 size="sm"
-                className="md:hidden"
+                className="md:hidden glass-effect border-glass-border hover:border-accent transition-all duration-300"
                 onClick={() => setIsOpen(!isOpen)}
               >
                 {isOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
@@ -122,13 +111,13 @@ export function Navigation() {
 
       {/* Mobile Navigation */}
       <nav
-        className={`fixed inset-0 z-40 md:hidden transition-all duration-500 ${
+        className={`fixed inset-0 z-40 md:hidden transition-all duration-700 ${
           isOpen
             ? 'opacity-100 pointer-events-auto'
             : 'opacity-0 pointer-events-none'
         }`}
       >
-        <div className="absolute inset-0 bg-background/95 backdrop-blur-xl" />
+        <div className="absolute inset-0 glass-effect backdrop-blur-3xl" />
         <div className="relative h-full flex flex-col justify-center items-center space-y-8">
           <div className="space-y-6">
             {navItems.map((item, index) => (
@@ -147,29 +136,16 @@ export function Navigation() {
           </div>
           
           {/* Mobile Language Switcher */}
-          <div className="flex items-center space-x-3 py-4">
-            {languages.map((lang) => (
-              <Button
-                key={lang.code}
-                variant={language === lang.code ? 'default' : 'outline'}
-                size="sm"
-                className="text-sm"
-                onClick={() => {
-                  setLanguage(lang.code)
-                  setIsOpen(false)
-                }}
-              >
-                {lang.flag} {lang.name}
-              </Button>
-            ))}
+          <div className="flex justify-center py-4">
+            <LanguageSwitcher variant="full" className="scale-110" />
           </div>
           
           {/* Mobile CV Download */}
           <MagneticButton 
             variant="default" 
-            className="group mt-4 inline-flex items-center justify-center px-6 py-3"
+            className="group mt-4 inline-flex items-center justify-center px-6 py-3 bg-gradient-primary hover:shadow-glow"
           >
-            <Download className="w-4 h-4 mr-2 transition-all duration-300 group-hover:translate-x-0.5" />
+            <Download className="w-4 h-4 mr-2 transition-all duration-300 group-hover:translate-x-0.5 group-hover:scale-110" />
             <span>{t('hero.cv')}</span>
           </MagneticButton>
         </div>

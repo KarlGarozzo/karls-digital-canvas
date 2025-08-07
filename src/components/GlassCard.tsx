@@ -6,9 +6,10 @@ interface GlassCardProps {
   className?: string
   hover?: boolean
   glow?: boolean
+  onClick?: () => void
 }
 
-export function GlassCard({ children, className, hover = true, glow = false }: GlassCardProps) {
+export function GlassCard({ children, className, hover = true, glow = false, onClick }: GlassCardProps) {
   return (
     <div
       className={cn(
@@ -26,6 +27,7 @@ export function GlassCard({ children, className, hover = true, glow = false }: G
         
         className
       )}
+      onClick={onClick}
     >
       {/* Subtle gradient overlay */}
       <div className="absolute inset-0 bg-gradient-to-br from-primary/5 to-accent/5 pointer-events-none" />

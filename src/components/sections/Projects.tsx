@@ -1,136 +1,202 @@
-import { GlassCard } from '@/components/GlassCard'
-import { Button } from '@/components/ui/button'
-import { ExternalLink, Github } from 'lucide-react'
-import { useLanguage } from '@/components/LanguageProvider'
+import { useState } from 'react'
 import { ScrollAnimation } from '@/components/ScrollAnimations'
+import { GlassCard } from '@/components/GlassCard'
+import { useLanguage } from '@/components/LanguageProvider'
+import { Github, ExternalLink, Eye } from 'lucide-react'
+import { Badge } from '@/components/ui/badge'
 import { MagneticButton } from '@/components/MagneticButton'
+import { ProjectModal } from '@/components/ProjectModal'
+import { SectionReveal } from '@/components/SectionReveal'
 
 export function Projects() {
   const { t } = useLanguage()
+  const [selectedProject, setSelectedProject] = useState<any>(null)
+  const [isModalOpen, setIsModalOpen] = useState(false)
+
+  const openProjectModal = (project: any) => {
+    setSelectedProject(project)
+    setIsModalOpen(true)
+  }
 
   const projects = [
     {
       title: t('projects.bmp.title'),
       description: t('projects.bmp.desc'),
+      longDescription: "A comprehensive BMP image processing application built in C, featuring advanced image manipulation algorithms and an intuitive user interface for seamless image editing.",
       tags: ['C', 'Image Processing', 'UI Design'],
       image: '/lovable-uploads/41ba9abd-e8fa-4aa0-8817-8693645e512b.png',
       github: '#',
       demo: '#',
+      features: [
+        'Advanced image processing algorithms',
+        'Real-time image preview',
+        'Multiple filter options',
+        'Optimized performance',
+        'Cross-platform compatibility'
+      ],
+      stack: ['C', 'SDL2', 'OpenCV', 'CMake']
     },
     {
       title: t('projects.logistics.title'),
       description: t('projects.logistics.desc'),
+      longDescription: "An automated logistics management system built with Python, streamlining operations through Excel integration and intelligent automation workflows.",
       tags: ['Python', 'Excel', 'Automation'],
       image: '/lovable-uploads/41ba9abd-e8fa-4aa0-8817-8693645e512b.png',
       github: '#',
       demo: '#',
+      features: [
+        'Automated report generation',
+        'Excel data processing',
+        'Real-time analytics',
+        'Error handling and validation',
+        'User-friendly interface'
+      ],
+      stack: ['Python', 'Pandas', 'Openpyxl', 'Tkinter']
     },
     {
       title: t('projects.portfolio.title'),
       description: t('projects.portfolio.desc'),
+      longDescription: "A modern, responsive portfolio website showcasing projects and skills with clean design, smooth animations, and optimized performance across all devices.",
       tags: ['HTML', 'CSS', 'JavaScript', 'Responsive'],
       image: '/lovable-uploads/41ba9abd-e8fa-4aa0-8817-8693645e512b.png',
       github: '#',
       demo: '#',
+      features: [
+        'Fully responsive design',
+        'Modern CSS animations',
+        'Interactive JavaScript features',
+        'SEO optimized',
+        'Fast loading performance'
+      ],
+      stack: ['HTML5', 'CSS3', 'JavaScript', 'Sass']
     },
     {
       title: t('projects.ai.title'),
       description: t('projects.ai.desc'),
+      longDescription: "An intelligent AI assistant powered by OpenAI's GPT, featuring automated workflows, natural language processing, and seamless Python integration for enhanced productivity.",
       tags: ['OpenAI', 'Python', 'Automation', 'AI'],
       image: '/lovable-uploads/41ba9abd-e8fa-4aa0-8817-8693645e512b.png',
       github: '#',
       demo: '#',
+      features: [
+        'Natural language processing',
+        'Automated task execution',
+        'API integration',
+        'Machine learning capabilities',
+        'Scalable architecture'
+      ],
+      stack: ['Python', 'OpenAI API', 'FastAPI', 'PostgreSQL']
     },
   ]
 
   return (
-    <section id="projects" className="py-20 relative">
-      <div className="container mx-auto px-6">
-        <div className="max-w-6xl mx-auto">
-          <ScrollAnimation animation="fadeInUp">
-            <h2 className="text-3xl md:text-4xl font-display font-bold text-center mb-12 gradient-text text-glow">
+    <>
+      <section id="projects" className="py-20 relative">
+        <div className="container mx-auto px-6">
+          <SectionReveal className="text-center mb-16">
+            <h2 className="text-4xl md:text-5xl font-bold font-display mb-6 gradient-text">
               {t('projects.title')}
             </h2>
-          </ScrollAnimation>
+            <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
+              Découvrez mes projets les plus récents et innovants
+            </p>
+          </SectionReveal>
 
           <div className="grid md:grid-cols-2 gap-8">
             {projects.map((project, index) => (
-              <ScrollAnimation 
-                key={index} 
-                animation={index % 2 === 0 ? 'fadeInLeft' : 'fadeInRight'}
-                delay={index * 200}
+              <SectionReveal
+                key={index}
+                delay={index * 150}
+                className="group"
               >
-                <GlassCard
-                  className="group overflow-hidden hover-lift backdrop-noise relative"
-                  hover={true}
-                >
-                  {/* Enhanced image with parallax effect */}
-                  <div className="relative h-48 overflow-hidden">
-                    <div className="absolute inset-0 bg-gradient-to-br from-accent/20 to-primary/20 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-                    <img
-                      src={project.image}
-                      alt={project.title}
-                      className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-t from-background/80 to-transparent" />
-                    
-                    {/* Floating tech badges */}
-                    <div className="absolute top-4 right-4 opacity-0 group-hover:opacity-100 transition-opacity duration-500">
-                      <div className="flex flex-wrap gap-1">
-                        {project.tags.slice(0, 2).map((tag, tagIndex) => (
-                          <span
-                            key={tagIndex}
-                            className="px-2 py-1 text-xs font-medium bg-glass-bg backdrop-blur-sm text-accent rounded-full border border-glass-border"
-                          >
-                            {tag}
-                          </span>
-                        ))}
+                <GlassCard className="h-full hover-lift hover-tilt transition-all duration-700 group cursor-pointer overflow-hidden" onClick={() => openProjectModal(project)}>
+                  <div className="p-6 h-full flex flex-col">
+                    {/* Project Image */}
+                    <div className="relative aspect-video rounded-lg overflow-hidden mb-6 bg-gradient-mesh">
+                      <img
+                        src={project.image}
+                        alt={project.title}
+                        className="w-full h-full object-cover transition-all duration-700 group-hover:scale-110 group-hover:blur-sm"
+                      />
+                      <div className="absolute inset-0 bg-gradient-to-t from-background/80 to-transparent opacity-0 group-hover:opacity-100 transition-all duration-500" />
+                      
+                      {/* Hover Overlay */}
+                      <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-500 backdrop-blur-sm">
+                        <MagneticButton
+                          variant="default"
+                          size="lg"
+                          className="bg-gradient-primary shadow-glow animate-zoom-in"
+                        >
+                          <Eye className="w-5 h-5 mr-2" />
+                          View Details
+                        </MagneticButton>
                       </div>
                     </div>
-                  </div>
 
-                  <div className="p-6 relative">
-                    {/* Subtle glow effect */}
-                    <div className="absolute inset-0 bg-gradient-to-br from-accent/5 to-primary/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500 rounded-b-2xl" />
-                    
-                    <div className="relative z-10">
-                      <h3 className="text-xl font-display font-semibold mb-3 text-foreground group-hover:text-accent transition-colors duration-300">
+                    {/* Project Content */}
+                    <div className="flex-1 flex flex-col">
+                      <h3 className="text-xl font-semibold mb-3 gradient-text-secondary transition-all duration-300 group-hover:text-shadow-glow">
                         {project.title}
                       </h3>
-                      
-                      <p className="text-muted-foreground mb-4 leading-relaxed">
+                      <p className="text-muted-foreground mb-4 flex-1 leading-relaxed">
                         {project.description}
                       </p>
 
+                      {/* Tags */}
                       <div className="flex flex-wrap gap-2 mb-6">
                         {project.tags.map((tag, tagIndex) => (
-                          <span
+                          <Badge
                             key={tagIndex}
-                            className="px-3 py-1 text-xs font-medium bg-accent/20 text-accent rounded-full hover:bg-accent/30 transition-colors duration-200"
+                            variant="secondary"
+                            className="text-xs glass-effect border-glass-border hover:border-accent transition-colors duration-300"
                           >
                             {tag}
-                          </span>
+                          </Badge>
                         ))}
                       </div>
 
-                      <div className="flex items-center space-x-3">
-                        <MagneticButton variant="ghost" size="sm" className="hover:bg-accent/20">
-                          <Github className="h-4 w-4 mr-2" />
+                      {/* Action Buttons */}
+                      <div className="flex gap-3">
+                        <MagneticButton
+                          variant="outline"
+                          size="sm"
+                          className="flex-1 group/btn glass-effect border-glass-border hover:border-accent"
+                          onClick={(e) => {
+                            e.stopPropagation()
+                            if (project.github) window.open(project.github, '_blank')
+                          }}
+                        >
+                          <Github className="w-4 h-4 mr-2 transition-transform group-hover/btn:scale-110 group-hover/btn:rotate-12" />
                           Code
                         </MagneticButton>
-                        <MagneticButton variant="ghost" size="sm" className="hover:bg-accent/20">
-                          <ExternalLink className="h-4 w-4 mr-2" />
+                        <MagneticButton
+                          variant="default"
+                          size="sm"
+                          className="flex-1 group/btn bg-gradient-primary hover:shadow-glow"
+                          onClick={(e) => {
+                            e.stopPropagation()
+                            if (project.demo) window.open(project.demo, '_blank')
+                          }}
+                        >
+                          <ExternalLink className="w-4 h-4 mr-2 transition-transform group-hover/btn:scale-110 group-hover/btn:translate-x-1" />
                           {t('projects.view')}
                         </MagneticButton>
                       </div>
                     </div>
                   </div>
                 </GlassCard>
-              </ScrollAnimation>
+              </SectionReveal>
             ))}
           </div>
         </div>
-      </div>
-    </section>
+      </section>
+
+      {/* Project Modal */}
+      <ProjectModal 
+        project={selectedProject}
+        isOpen={isModalOpen}
+        onClose={() => setIsModalOpen(false)}
+      />
+    </>
   )
 }
