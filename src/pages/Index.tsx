@@ -47,9 +47,8 @@ const Index = () => {
           </main>
           
           {/* Footer */}
-      <Footer />
-      <FloatingButtons />
-    </div>
+          <Footer />
+        </div>
       </LanguageProvider>
     </ThemeProvider>
   )
