@@ -98,11 +98,12 @@ export function Navigation() {
               <MagneticButton 
                 variant="outline" 
                 size="sm" 
-                className="group hidden md:flex hover:bg-primary hover:text-primary-foreground transition-all duration-300 border-primary/20 hover:border-primary overflow-hidden relative"
+                className="group hidden md:flex items-center hover:bg-primary hover:text-primary-foreground transition-all duration-300 border-primary/20 hover:border-primary hover:shadow-glow overflow-hidden relative px-4 py-2"
               >
-                <Download className="h-4 w-4 mr-2 group-hover:rotate-12 transition-transform duration-300" />
-                {t('hero.cv')}
-                <div className="absolute inset-0 bg-gradient-to-r from-primary/10 to-accent/10 translate-x-[-100%] group-hover:translate-x-0 transition-transform duration-500" />
+                <Download className="h-4 w-4 mr-2 transition-all duration-300 group-hover:translate-x-1" />
+                <span className="transition-transform duration-300 group-hover:translate-x-1">{t('hero.cv')}</span>
+                <div className="absolute inset-0 bg-gradient-to-r from-primary/10 to-primary/5 translate-x-[-100%] group-hover:translate-x-0 transition-transform duration-500" />
+                <div className="absolute inset-0 border border-primary/0 group-hover:border-primary/30 rounded-md transition-all duration-300" />
               </MagneticButton>
               
               <ThemeToggle />
@@ -168,10 +169,10 @@ export function Navigation() {
           {/* Mobile CV Download */}
           <MagneticButton 
             variant="default" 
-            className="group mt-4 overflow-hidden relative"
+            className="group mt-4 overflow-hidden relative flex items-center px-6 py-3"
           >
-            <Download className="h-4 w-4 mr-2 group-hover:rotate-12 transition-transform duration-300" />
-            {t('hero.cv')}
+            <Download className="h-4 w-4 mr-2 transition-all duration-300 group-hover:translate-x-1" />
+            <span className="transition-transform duration-300 group-hover:translate-x-1">{t('hero.cv')}</span>
             <div className="absolute inset-0 bg-gradient-to-r from-white/10 to-white/5 translate-x-[-100%] group-hover:translate-x-0 transition-transform duration-500" />
           </MagneticButton>
         </div>
