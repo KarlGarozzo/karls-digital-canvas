@@ -22,6 +22,7 @@ export default {
 				sans: ['Inter', 'system-ui', 'sans-serif'],
 				display: ['Sora', 'Inter', 'system-ui', 'sans-serif'],
 				signature: ['Caveat', 'cursive'],
+				mono: ['JetBrains Mono', 'monospace'],
 			},
 			colors: {
 				border: 'hsl(var(--border))',
@@ -80,6 +81,9 @@ export default {
 				glass: 'var(--shadow-glass)',
 				glow: 'var(--shadow-glow)',
 				card: 'var(--shadow-card)',
+				intense: 'var(--shadow-intense)',
+				floating: 'var(--shadow-floating)',
+				'inner-glow': 'var(--shadow-inner-glow)',
 			},
 			backdropBlur: {
 				xs: '2px',
@@ -129,6 +133,26 @@ export default {
 				'spin-slow': {
 					'from': { transform: 'rotate(0deg)' },
 					'to': { transform: 'rotate(360deg)' }
+				},
+				'bounce-gentle': {
+					'0%, 100%': { transform: 'translateY(0)' },
+					'50%': { transform: 'translateY(-4px)' }
+				},
+				'slide-in-up': {
+					'0%': { transform: 'translateY(100%)', opacity: '0' },
+					'100%': { transform: 'translateY(0)', opacity: '1' }
+				},
+				'slide-in-down': {
+					'0%': { transform: 'translateY(-100%)', opacity: '0' },
+					'100%': { transform: 'translateY(0)', opacity: '1' }
+				},
+				'reveal-up': {
+					'0%': { transform: 'translateY(60px)', opacity: '0' },
+					'100%': { transform: 'translateY(0)', opacity: '1' }
+				},
+				'reveal-scale': {
+					'0%': { transform: 'scale(0.8)', opacity: '0' },
+					'100%': { transform: 'scale(1)', opacity: '1' }
 				}
 			},
 			animation: {
@@ -140,7 +164,12 @@ export default {
 				'scale-in': 'scale-in 0.5s ease-out',
 				'glow-pulse': 'glow-pulse 2s ease-in-out infinite',
 				'float': 'float 3s ease-in-out infinite',
-				'spin-slow': 'spin-slow 8s linear infinite'
+				'spin-slow': 'spin-slow 8s linear infinite',
+				'bounce-gentle': 'bounce-gentle 2s ease-in-out infinite',
+				'slide-in-up': 'slide-in-up 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94)',
+				'slide-in-down': 'slide-in-down 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94)',
+				'reveal-up': 'reveal-up 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94)',
+				'reveal-scale': 'reveal-scale 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94)'
 			}
 		}
 	},

@@ -4,6 +4,7 @@ import { LanguageProvider } from '@/components/LanguageProvider'
 import { Navigation } from '@/components/Navigation'
 import { ParticleSystem } from '@/components/ParticleSystem'
 import { AnimatedBackground } from '@/components/AnimatedBackground'
+import { FloatingButtons } from '@/components/FloatingButtons'
 import { Hero } from '@/components/sections/Hero'
 import { About } from '@/components/sections/About'
 import { Education } from '@/components/sections/Education'
@@ -34,6 +35,9 @@ const Index = () => {
           
           {/* Navigation */}
           <Navigation />
+          
+          {/* Floating Action Buttons */}
+          <FloatingButtons />
           
           {/* Main Content */}
           <main className="relative z-10">

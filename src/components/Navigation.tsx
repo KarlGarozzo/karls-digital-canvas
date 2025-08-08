@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react'
 import { useLanguage } from '@/components/LanguageProvider'
 import { ThemeToggle } from '@/components/ThemeToggle'
 import { MagneticButton } from '@/components/MagneticButton'
+import { LanguageSwitcher } from '@/components/LanguageSwitcher'
 
 export function Navigation() {
   const [isOpen, setIsOpen] = useState(false)
@@ -44,9 +45,9 @@ export function Navigation() {
   return (
     <>
       <nav
-        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
+        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-700 ${
           isScrolled 
-            ? 'bg-background/95 backdrop-blur-xl shadow-card border-b border-border/50' 
+            ? 'bg-background/90 backdrop-ultra-blur shadow-floating border-b border-primary/10' 
             : 'bg-transparent'
         }`}
       >
@@ -75,30 +76,16 @@ export function Navigation() {
 
             {/* Right side controls */}
             <div className="flex items-center space-x-4">
-              {/* Language Switcher */}
-              <div className="hidden md:flex items-center space-x-1 bg-secondary/50 rounded-full p-1">
-                {languages.map((lang) => (
-                  <MagneticButton
-                    key={lang.code}
-                    variant={language === lang.code ? 'default' : 'ghost'}
-                    size="sm"
-                    className={`text-xs px-3 py-2 rounded-full transition-all ${
-                      language === lang.code 
-                        ? 'bg-primary text-primary-foreground shadow-lg' 
-                        : 'hover:bg-primary/10'
-                    }`}
-                    onClick={() => setLanguage(lang.code)}
-                  >
-                    {lang.flag}
-                  </MagneticButton>
-                ))}
+            {/* Modern Language Switcher */}
+              <div className="hidden md:block">
+                <LanguageSwitcher />
               </div>
               
               {/* Download CV */}
               <MagneticButton 
                 variant="outline" 
                 size="sm" 
-                className="group hidden md:inline-flex items-center justify-center hover:bg-primary hover:text-primary-foreground transition-all duration-300 border-primary/20 hover:border-primary hover:shadow-glow relative"
+                className="group hidden md:inline-flex items-center justify-center hover:bg-primary hover:text-primary-foreground transition-all duration-500 border-primary/20 hover:border-primary hover:shadow-glow bg-background/80 backdrop-ultra-blur"
               >
                 <Download className="w-4 h-4 mr-2 transition-all duration-300 group-hover:translate-x-0.5" />
                 <span className="text-sm font-medium">{t('hero.cv')}</span>
@@ -128,7 +115,7 @@ export function Navigation() {
             : 'opacity-0 pointer-events-none'
         }`}
       >
-        <div className="absolute inset-0 bg-background/95 backdrop-blur-xl" />
+        <div className="absolute inset-0 bg-background/95 backdrop-ultra-blur" />
         <div className="relative h-full flex flex-col justify-center items-center space-y-8">
           <div className="space-y-6">
             {navItems.map((item, index) => (
