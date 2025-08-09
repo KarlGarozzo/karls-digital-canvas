@@ -9,14 +9,14 @@ const buttonVariants = cva(
   {
     variants: {
       variant: {
-        default: "bg-primary text-primary-foreground hover:bg-primary/90 shadow-sm hover:shadow-md",
-        destructive: "bg-destructive text-destructive-foreground hover:bg-destructive/90",
-        outline: "border border-glass-border bg-glass-bg backdrop-blur-sm text-foreground hover:bg-accent/20 hover:border-accent/30",
-        secondary: "bg-secondary text-secondary-foreground hover:bg-secondary/80",
-        ghost: "text-foreground hover:bg-accent/20 hover:text-accent-foreground",
-        link: "text-primary underline-offset-4 hover:underline",
-        gradient: "bg-gradient-primary text-white hover:shadow-glow hover:scale-105 font-semibold",
-        glass: "bg-glass-bg backdrop-blur-md border border-glass-border text-foreground hover:bg-accent/20 hover:border-accent/30 shadow-glass",
+        default: "bg-primary text-primary-foreground hover:bg-primary/90 shadow-sm hover:shadow-md gap-2",
+        destructive: "bg-destructive text-destructive-foreground hover:bg-destructive/90 gap-2",
+        outline: "border border-glass-border bg-glass-bg backdrop-blur-sm text-foreground hover:bg-accent/20 hover:border-accent/30 gap-2",
+        secondary: "bg-secondary text-secondary-foreground hover:bg-secondary/80 gap-2",
+        ghost: "text-foreground hover:bg-accent/20 hover:text-accent-foreground gap-2",
+        link: "text-primary underline-offset-4 hover:underline gap-2",
+        gradient: "bg-gradient-primary text-white hover:shadow-glow hover:scale-105 font-semibold gap-2",
+        glass: "bg-glass-bg backdrop-blur-md border border-glass-border text-foreground hover:bg-accent/20 hover:border-accent/30 shadow-glass gap-2",
       },
       size: {
         default: "h-10 px-4 py-2",

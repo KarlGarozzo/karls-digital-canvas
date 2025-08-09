@@ -85,10 +85,10 @@ export function Navigation() {
               <MagneticButton 
                 variant="outline" 
                 size="sm" 
-                className="group hidden md:inline-flex items-center justify-center hover:bg-primary hover:text-primary-foreground transition-all duration-500 border-primary/20 hover:border-primary hover:shadow-glow bg-background/80 backdrop-ultra-blur"
+                className="group hidden md:inline-flex items-center justify-center gap-2 hover:bg-primary hover:text-primary-foreground transition-all duration-500 border-primary/20 hover:border-primary hover:shadow-glow bg-background/80 backdrop-ultra-blur"
               >
-                <Download className="w-4 h-4 mr-2 transition-all duration-300 group-hover:translate-x-0.5" />
-                <span className="text-sm font-medium">{t('hero.cv')}</span>
+                <Download className="w-4 h-4 transition-all duration-300 group-hover:translate-y-0.5" />
+                <span className="text-sm font-medium whitespace-nowrap">{t('hero.cv')}</span>
               </MagneticButton>
               
               <ThemeToggle />
@@ -154,10 +154,10 @@ export function Navigation() {
           {/* Mobile CV Download */}
           <MagneticButton 
             variant="default" 
-            className="group mt-4 inline-flex items-center justify-center px-6 py-3"
+            className="group mt-4 inline-flex items-center justify-center gap-3 px-6 py-3"
           >
-            <Download className="w-4 h-4 mr-2 transition-all duration-300 group-hover:translate-x-0.5" />
-            <span>{t('hero.cv')}</span>
+            <Download className="w-4 h-4 transition-all duration-300 group-hover:translate-y-0.5" />
+            <span className="whitespace-nowrap">{t('hero.cv')}</span>
           </MagneticButton>
         </div>
       </nav>

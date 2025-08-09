@@ -39,10 +39,10 @@ export function Footer() {
               <div className="space-y-3">
                 <MagneticButton
                   variant="outline"
-                  className="w-full md:w-auto bg-background/50 backdrop-blur-sm border-primary/30 hover:bg-primary hover:text-primary-foreground shadow-card hover:shadow-glow transition-all duration-500"
+                  className="w-full md:w-auto bg-background/50 backdrop-blur-sm border-primary/30 hover:bg-primary hover:text-primary-foreground shadow-card hover:shadow-glow transition-all duration-500 gap-2"
                 >
-                  <Download className="h-4 w-4 mr-2" />
-                  {t('footer.cv')}
+                  <Download className="h-4 w-4 transition-all duration-300 group-hover:translate-y-0.5" />
+                  <span className="whitespace-nowrap">{t('footer.cv')}</span>
                 </MagneticButton>
                 <MagneticButton
                   variant="ghost"

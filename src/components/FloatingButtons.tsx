@@ -47,11 +47,11 @@ export function FloatingButtons() {
       {/* Download CV Button */}
       <Button
         variant="outline"
-        className="group bg-background/80 backdrop-ultra-blur border-primary/30 hover:bg-primary hover:text-primary-foreground shadow-card hover:shadow-glow transition-all duration-500"
+        className="group bg-background/80 backdrop-ultra-blur border-primary/30 hover:bg-primary hover:text-primary-foreground shadow-card hover:shadow-glow transition-all duration-500 gap-3"
         size="lg"
       >
-        <Download className="h-5 w-5 mr-2 transition-transform duration-300 group-hover:translate-x-0.5" />
-        <span className="hidden sm:inline">{t('hero.cv')}</span>
+        <Download className="h-5 w-5 transition-transform duration-300 group-hover:translate-y-0.5" />
+        <span className="hidden sm:inline whitespace-nowrap">{t('hero.cv')}</span>
       </Button>
 
       {/* Back to Top Button */}

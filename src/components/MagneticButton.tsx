@@ -1,4 +1,5 @@
 import { useRef, useState } from 'react'
+import * as React from 'react'
 import { Button, ButtonProps } from '@/components/ui/button'
 import { cn } from '@/lib/utils'
 
@@ -7,12 +8,12 @@ interface MagneticButtonProps extends ButtonProps {
   children: React.ReactNode
 }
 
-export function MagneticButton({ 
+export const MagneticButton = React.forwardRef<HTMLButtonElement, MagneticButtonProps>(({ 
   magnetism = 0.3, 
   children, 
   className,
   ...props 
-}: MagneticButtonProps) {
+}, ref) => {
   const buttonRef = useRef<HTMLButtonElement>(null)
   const [position, setPosition] = useState({ x: 0, y: 0 })
   const [isHovering, setIsHovering] = useState(false)
@@ -41,7 +42,7 @@ export function MagneticButton({
 
   return (
     <Button
-      ref={buttonRef}
+      ref={ref || buttonRef}
       className={cn(
         'relative overflow-hidden transition-all duration-300 ease-out',
         'before:absolute before:inset-0 before:bg-gradient-to-r before:from-accent/20 before:to-primary/20',
@@ -69,4 +70,6 @@ export function MagneticButton({
       )}
     </Button>
   )
-}
+})
+
+MagneticButton.displayName = "MagneticButton"

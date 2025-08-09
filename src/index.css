@@ -296,4 +296,53 @@
   .backdrop-noise {
     background-image: url("data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTAwIiBoZWlnaHQ9IjEwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KICA8ZGVmcz4KICAgIDxmaWx0ZXIgaWQ9Im5vaXNlIj4KICAgICAgPGZlVHVyYnVsZW5jZSB0eXBlPSJmcmFjdGFsTm9pc2UiIGJhc2VGcmVxdWVuY3k9IjAuOSIgbnVtT2N0YXZlcz0iNCIgc3RpdGNoVGlsZXM9InN0aXRjaCIvPgogICAgPC9maWx0ZXI+CiAgPC9kZWZzPgogIDxyZWN0IHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiIGZpbHRlcj0idXJsKCNub2lzZSkiIG9wYWNpdHk9IjAuMDUiLz4KPC9zdmc+");
   }
+  
+  /* Enhanced button utilities */
+  .btn-enhanced {
+    @apply inline-flex items-center justify-center gap-2 transition-all duration-300 ease-out;
+  }
+  
+  .btn-enhanced-lg {
+    @apply inline-flex items-center justify-center gap-3 transition-all duration-300 ease-out;
+  }
+  
+  /* Download button specific improvements */
+  .download-btn {
+    @apply gap-2 sm:gap-3;
+  }
+  
+  .download-btn .download-icon {
+    @apply w-4 h-4 sm:w-5 sm:h-5 transition-transform duration-300;
+  }
+  
+  .download-btn:hover .download-icon {
+    @apply translate-y-0.5;
+  }
+  
+  /* Responsive utilities */
+  .responsive-text {
+    @apply text-sm sm:text-base;
+  }
+  
+  .responsive-gap {
+    @apply gap-2 sm:gap-3;
+  }
+  
+  .responsive-padding {
+    @apply px-3 py-2 sm:px-4 sm:py-2.5 md:px-6 md:py-3;
+  }
+  
+  .responsive-margin {
+    @apply m-2 sm:m-3 md:m-4;
+  }
+  
+  /* Container improvements */
+  .container-responsive {
+    @apply container mx-auto px-4 sm:px-6 lg:px-8;
+  }
+  
+  /* Button improvements for all screen sizes */
+  .btn-mobile-friendly {
+    @apply min-h-[44px] min-w-[44px] touch-manipulation;
+  }
 }
