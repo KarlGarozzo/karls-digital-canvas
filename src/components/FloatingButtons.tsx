@@ -47,7 +47,7 @@ export function FloatingButtons() {
       {/* Download CV Button */}
       <Button
         variant="outline"
-        className="group bg-background/80 backdrop-ultra-blur border-primary/30 hover:bg-primary hover:text-primary-foreground shadow-card hover:shadow-glow transition-all duration-500 gap-3"
+        className="group bg-background/80 backdrop-ultra-blur border-primary/30 hover:bg-primary hover:text-primary-foreground shadow-card hover:shadow-glow transition-all duration-500"
         size="lg"
       >
         <Download className="h-5 w-5 transition-transform duration-300 group-hover:translate-y-0.5" />
