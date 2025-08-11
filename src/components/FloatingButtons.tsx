@@ -50,8 +50,8 @@ export function FloatingButtons() {
         className="group bg-background/80 backdrop-ultra-blur border-primary/30 hover:bg-primary hover:text-primary-foreground shadow-card hover:shadow-glow transition-all duration-500"
         size="lg"
       >
-        <Download className="h-5 w-5 transition-transform duration-300 group-hover:translate-y-0.5" />
-        <span className="hidden sm:inline whitespace-nowrap">{t('hero.cv')}</span>
+        <Download className="h-5 w-5 transition-transform duration-300 group-hover:translate-y-0.5 flex-shrink-0" />
+        <span className="hidden sm:inline whitespace-nowrap font-medium">{t('hero.cv')}</span>
       </Button>
 
       {/* Back to Top Button */}

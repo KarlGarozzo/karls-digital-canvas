@@ -99,10 +99,10 @@ export function Hero() {
               <MagneticButton 
                 variant="outline" 
                 size="lg" 
-                className="group bg-background/80 backdrop-ultra-blur border-primary/30 hover:bg-primary hover:text-primary-foreground shadow-card hover:shadow-glow transition-all duration-500"
+                className="group bg-background/80 backdrop-ultra-blur border-primary/30 hover:bg-primary hover:text-primary-foreground shadow-card hover:shadow-glow transition-all duration-500 px-8 py-6 text-lg font-semibold"
               >
-                <Download className="w-5 h-5 transition-all duration-300 group-hover:translate-y-0.5" />
-                {t('hero.cv')}
+                <Download className="w-5 h-5 transition-all duration-300 group-hover:translate-y-0.5 flex-shrink-0" />
+                <span className="whitespace-nowrap">{t('hero.cv')}</span>
               </MagneticButton>
             </div>
           </ScrollAnimation>
